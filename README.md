@@ -25,7 +25,7 @@
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: ******\*\*******\_\_\_\_******\*\*******
+Name of feature: **\*\***\*\***\*\***\_\_\_\_**\*\***\*\***\*\***
 
 Estimate of time needed to complete: 4hrs
 
@@ -35,4 +35,4 @@ Finish time:
 
 Actual time needed to complete: **\_**
 
-![Web Request Response Cycle] (WebRequestResponseCycle.png)
+![Web Request Response Cycle Image](img/WebRequestResponseCycle.PNG)
