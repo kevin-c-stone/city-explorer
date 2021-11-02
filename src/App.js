@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import Header from "./Header.js";
+import Map from "./Map.js";
+import Main from "./Main.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityValue: "",
+      mapValue: "",
+    };
+  }
+
+  handleClick = async (e) => {
+    try {
+      e.preventDefault();
+      await this.handleCoordinates();
+      this.handleMap();
+    } catch (error) {
+      this.setState({ error: true });
+    }
+  };
+
+  handleChange = (e) => {
+    e.preventDefault();
+    this.setState({ cityValue: e.target.value });
+    this.setState({ mapValue: e.target.value });
+  };
+
+  handleCoordinates = async () => {
+    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.cityValue}&format=json`;
+
+    let response = await axios.get(url);
+    this.setState({ location: response.data[0] });
+  };
+
+  handleMap = async () => {
+    const map = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=15`;
+
+    let response = await axios.get(map);
+    this.setState({ mapValue: response });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <Main
+          handleClick={this.handleClick}
+          handleChange={this.handleChange}
+          cityValue={this.state.cityValue}
+        />
+        <Map mapValue={this.state.mapValue} />
+      </div>
+    );
+  }
 }
-
-export default App;
