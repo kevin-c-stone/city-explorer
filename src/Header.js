@@ -8,7 +8,7 @@ export default class Header extends Component {
       <>
         <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand href="#home">Location Finder</Navbar.Brand>
+            <Navbar.Brand href="#home">Find Location</Navbar.Brand>
           </Container>
         </Navbar>
         <br />
